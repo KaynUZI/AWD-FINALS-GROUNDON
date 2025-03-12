@@ -67,6 +67,13 @@ Guiding Question:
 - What are key components
 - What technology used and how it is used
 
+DIY Home Improver
+### Project Overview
+DIY Home Improver is a web application designed for homeowners and DIY enthusiasts who want to enhance their living spaces through creative and practical home improvement projects. The platform provides step-by-step guides, tool recommendations, and a community space for sharing experiences.
+
+### Purpose
+The purpose of this project is to create an accessible and engaging platform that empowers individuals to take on DIY projects with confidence. By offering structured guides, expert advice, and a collaborative community, the app aims to inspire users to enhance their homes while fostering a culture of shared learning.
+
 ### Key Components
 <!-- TODO: List of Key Components -->
 <!-- The following are just sample -->
