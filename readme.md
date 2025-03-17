@@ -62,16 +62,20 @@
 Description of the project in details.
 
 Guiding Question:
-- What is the project
+- What is the project?
+
 DIY Home Improver is a web application designed for homeowners and DIY enthusiasts who want to enhance their living spaces through creative and practical home improvement projects. The platform provides step-by-step guides, tool recommendations, and a community space for sharing experiences.
 
-- Whats the purpose
+- Whats the purpose?
+
 The purpose of this project is to create an accessible and engaging platform that empowers individuals to take on DIY projects with confidence. By offering structured guides, expert advice, and a collaborative community, the app aims to inspire users to enhance their homes while fostering a culture of shared learning.
 
-- What are key components
+- What are key components?
+
 The DIY Home Improver website is a go-to space for homeowners and DIY lovers looking for easy-to-follow project guides, tool suggestions, and a supportive community. With a warm and welcoming design, it’s simple to browse projects, share your own ideas, and leave reviews. A community forum lets users connect, swap tips, and get advice, while an admin system helps keep content helpful and reliable. With user accounts, personalized profiles, and an organized setup, the site makes DIY home improvement fun and accessible for everyone.
 
-- What technology used and how it is used
+- What technology used and how it is used?
+
 We started by designing our app prototype in Figma, which made it easy to plan and visualize the look and layout. Once we were happy with the design, we used Visual Studio Code to turn it into a working prototype by adding functionality and interactions. To keep everything organized and work together smoothly, we shared our code on Github, where we could track changes, get feedback, and improve our project. This process helped us make our app more polished, functional, and ready for real use.
 
 
