@@ -13,7 +13,7 @@
 </div>
 <!-- TODO: Make a short description -->
 <div align="center">
-  "An app that offers step-by-step guides, tool recommendations, and community forums, with a warm and practical design that inspirers creativity"
+  "An app that offers step-by-step guides, tool recommendations, and community forums, with a warm and practical design that inspires creativity"
 </div>
 
 <br />
