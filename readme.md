@@ -104,24 +104,91 @@ We started by designing our app prototype in Figma, which made it easy to plan a
 7. File Structure to follow below.
 
 ```
-WD-ProjectName
+AWD-FINALS-GROUNDON
 └─ assets
 |   └─ css
 |   |   └─ style.css
 |   └─ img
-|   |   └─ fileWith.jpeg/.jpg/.webp/.png
+|   |   └─ logo.png
+|   |   └─ logo2.png
+|   |   └─ aboutus.png
+|   |   └─ interior.png
 |   └─ js
 |       └─ script.js
 └─ pages
-|  └─ pageName
-|     └─ assets
-|     |  └─ css
-|     |  |  └─ style.css
-|     |  └─ img
-|     |  |  └─ fileWith.jpeg/.jpg/.webp/.png
-|     |  └─ js
-|     |     └─ script.js
-|     └─ index.html
+|   |  └─ sign in page
+|   |  |   └─ assets
+|   |  |   |    └─ css
+|   |  |   |        └─ style.css
+|   |  |   └─ img
+|   |  |   |   └─ logo.png
+|   |  |   |   └─ logo2.png
+|   |  |   |   └─ interior.png
+|   |  |   └─ js
+|   |  |   |   └─ script.js
+|   |  └─ index.html
+|   |  
+|   └─ project page
+|   |    └─ assets
+|   |    |      └─ css
+|   |    |          └─ style.css
+|   |    └─ img
+|   |    |   └─ logo.png
+|   |    |   └─ logo2.png
+|   |    |   └─ interior.png
+|   |    |   └─ Projects1.jpg
+|   |    |   └─ Projects2.jpg
+|   |    |   └─ Projects3.jpg
+|   |    └─ js
+|   |        └─ script.js
+|   └─ index.html
+|   |  
+|   └─ log in page
+|   |     └─ assets
+|   |     |   └─ css
+|   |     |       └─ style.css
+|   |     └─ img
+|   |     |   └─ logo.png
+|   |     |   └─ logo2.png
+|   |     |   └─ interior.png
+|   |     └─ js
+|   |         └─ script.js
+|   └─ index.html
+|   | 
+|   └─ forum page
+|   |    └─ assets
+|   |    |    └─ css
+|   |    |        └─ style.css
+|   |    └─ img
+|   |    |   └─ logo.png
+|   |    |   └─ logo2.png
+|   |    |   └─ interior.png
+|   |    └─ js
+|   |        └─ script.js
+|   └─ index.html
+|   |     
+|   └─ service page
+|   |    └─ assets
+|   |    |    └─ css
+|   |    |        └─ style.css
+|   |    └─ img
+|   |    |   └─ logo.png
+|   |    |   └─ logo2.png
+|   |    |   └─ interior.png
+|   |    |   └─ Bathroom1.jpg
+|   |    |   └─ Bathroom2.jpg
+|   |    |   └─ Bedroom1.jpg
+|   |    |   └─ Bedroom2.jpg
+|   |    |   └─ Dining1.jpg
+|   |    |   └─ Dining2.jpg
+|   |    |   └─ Kitchen1.jpg
+|   |    |   └─ kitchen2.jpg
+|   |    |   └─ Services1.webp
+|   |    |   └─ Services2.jpg
+|   |    └─ js
+|   |        └─ script.js
+|   └─ index.html
+|   
 └─ index.html
 └─ readme.md
 ```
@@ -131,4 +198,7 @@ WD-ProjectName
 <!-- TODO: Add References -->
 | Title | Purpose | Link |
 |-|-|-|
-| Youtube | We used this to figure out different designs to make our website better and other special effects to be added | youtube.com |
+| Youtube | We used this to figure out different designs to make our website better and other special effects to be added. | https://www.youtube.com/ |
+| Figma | This helps us to fix the layout easier and bring our imaginative website to reality. | https://www.figma.com/ |
+| Bootstrap | This helps us in our mobile view website. | https://getbootstrap.com/ |
+| Pinterest | Helps us to improve the layout of the website and some of our images. | https://ph.pinterest.com/ |
