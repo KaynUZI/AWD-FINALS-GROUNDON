@@ -3,8 +3,8 @@ import { PrismaClient as PostgresqlClient } from "@/../prisma/generated/postgres
 
 const prisma = new PostgresqlClient();
 
-// GET /api/DIYHomes/forum - Get all posts with their replies, sorted by most recent, with pagination, search, and filtering
-export async function GET(request) {
+// GET /api/DIYHomes/forum/replies/[reply_id] - Get a single reply, with pagination, search, and filtering
+export async function GET(request, { params }) {
     try {
         const { searchParams } = new URL(request.url);
         const page = parseInt(searchParams.get('page') || '1');
@@ -15,9 +15,21 @@ export async function GET(request) {
         const startDate = searchParams.get('startDate');
         const endDate = searchParams.get('endDate');
         const sortBy = searchParams.get('sortBy') || 'createdAt';
-        const sortOrder = searchParams.get('sortOrder') || 'desc';
+        const sortOrder = searchParams.get('sortOrder') || 'asc';
+
+        const reply = await prisma.replyDIYHomes.findUnique({
+            where: { id: params.reply_id }
+        });
+
+        if (!reply) {
+            return NextResponse.json(
+                { error: "Reply not found" },
+                { status: 404 }
+            );
+        }
 
         const where = {
+            postId: reply.postId,
             ...(search ? {
                 OR: [
                     { content: { contains: search, mode: 'insensitive' } },
@@ -33,27 +45,21 @@ export async function GET(request) {
             } : {})
         };
 
-        const [posts, total] = await Promise.all([
-            prisma.postDIYHomes.findMany({
+        const [replies, total] = await Promise.all([
+            prisma.replyDIYHomes.findMany({
                 where,
-                include: {
-                    replies: {
-                        orderBy: {
-                            createdAt: 'asc'
-                        }
-                    }
-                },
                 orderBy: {
                     [sortBy]: sortOrder
                 },
                 skip,
                 take: limit
             }),
-            prisma.postDIYHomes.count({ where })
+            prisma.replyDIYHomes.count({ where })
         ]);
 
         return NextResponse.json({
-            posts,
+            reply,
+            replies,
             pagination: {
                 total,
                 page,
@@ -63,67 +69,52 @@ export async function GET(request) {
         });
     } catch (error) {
         return NextResponse.json(
-            { error: "Failed to fetch posts" },
+            { error: "Failed to fetch reply" },
             { status: 500 }
         );
     }
 }
 
-// POST /api/DIYHomes/forum - Create a new post
-export async function POST(request) {
+// DELETE /api/DIYHomes/forum/replies/[reply_id] - Delete a reply
+export async function DELETE(request, { params }) {
     try {
-        const { content, userId, userName } = await request.json();
+        await prisma.replyDIYHomes.delete({
+            where: { id: params.reply_id }
+        });
 
-        if (!content || !userId || !userName) {
+        return NextResponse.json({ 
+            message: "Reply deleted successfully" 
+        });
+    } catch (error) {
+        return NextResponse.json(
+            { error: "Failed to delete reply" },
+            { status: 500 }
+        );
+    }
+}
+
+// PUT /api/DIYHomes/forum/replies/[reply_id] - Update a reply
+export async function PUT(request, { params }) {
+    try {
+        const { content } = await request.json();
+
+        if (!content) {
             return NextResponse.json(
-                { error: "Content, userId, and userName are required" },
+                { error: "Content is required" },
                 { status: 400 }
             );
         }
 
-        const newPost = await prisma.postDIYHomes.create({
-            data: {
-                content,
-                userId,
-                userName
-            }
+        const updatedReply = await prisma.replyDIYHomes.update({
+            where: { id: params.reply_id },
+            data: { content }
         });
 
-        return NextResponse.json(newPost, { status: 201 });
+        return NextResponse.json(updatedReply);
     } catch (error) {
         return NextResponse.json(
-            { error: "Failed to create post" },
+            { error: "Failed to update reply" },
             { status: 500 }
         );
     }
-}
-
-// POST /api/DIYHomes/forum/reply - Add a reply to a post
-export async function POST(request) {
-    try {
-        const body = await request.json();
-        
-        if (!body.postId || !body.content || !body.userId || !body.userName) {
-            return NextResponse.json(
-                { error: "postId, content, userId, and userName are required" },
-                { status: 400 }
-            );
-        }
-
-        const reply = await prisma.replyDIYHomes.create({
-            data: {
-                content: body.content,
-                userId: body.userId,
-                userName: body.userName,
-                postId: body.postId
-            }
-        });
-
-        return NextResponse.json(reply);
-    } catch (error) {
-        return NextResponse.json(
-            { error: "Failed to create reply" },
-            { status: 500 }
-        );
-    }
-}
+} 

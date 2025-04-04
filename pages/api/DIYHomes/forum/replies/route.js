@@ -3,10 +3,11 @@ import { PrismaClient as PostgresqlClient } from "@/../prisma/generated/postgres
 
 const prisma = new PostgresqlClient();
 
-// GET /api/DIYHomes/forum - Get all posts with their replies, sorted by most recent, with pagination, search, and filtering
+// GET /api/DIYHomes/forum/replies - Get all replies of a specific post, with pagination, search, and filtering
 export async function GET(request) {
     try {
         const { searchParams } = new URL(request.url);
+        const postId = searchParams.get('postId');
         const page = parseInt(searchParams.get('page') || '1');
         const limit = parseInt(searchParams.get('limit') || '10');
         const skip = (page - 1) * limit;
@@ -15,9 +16,10 @@ export async function GET(request) {
         const startDate = searchParams.get('startDate');
         const endDate = searchParams.get('endDate');
         const sortBy = searchParams.get('sortBy') || 'createdAt';
-        const sortOrder = searchParams.get('sortOrder') || 'desc';
+        const sortOrder = searchParams.get('sortOrder') || postId ? 'asc' : 'desc';
 
         const where = {
+            ...(postId ? { postId } : {}),
             ...(search ? {
                 OR: [
                     { content: { contains: search, mode: 'insensitive' } },
@@ -33,27 +35,20 @@ export async function GET(request) {
             } : {})
         };
 
-        const [posts, total] = await Promise.all([
-            prisma.postDIYHomes.findMany({
+        const [replies, total] = await Promise.all([
+            prisma.replyDIYHomes.findMany({
                 where,
-                include: {
-                    replies: {
-                        orderBy: {
-                            createdAt: 'asc'
-                        }
-                    }
-                },
                 orderBy: {
                     [sortBy]: sortOrder
                 },
                 skip,
                 take: limit
             }),
-            prisma.postDIYHomes.count({ where })
+            prisma.replyDIYHomes.count({ where })
         ]);
 
         return NextResponse.json({
-            posts,
+            replies,
             pagination: {
                 total,
                 page,
@@ -63,67 +58,38 @@ export async function GET(request) {
         });
     } catch (error) {
         return NextResponse.json(
-            { error: "Failed to fetch posts" },
+            { error: "Failed to fetch replies" },
             { status: 500 }
         );
     }
 }
 
-// POST /api/DIYHomes/forum - Create a new post
+// POST /api/DIYHomes/forum/replies - Create a new reply
 export async function POST(request) {
     try {
-        const { content, userId, userName } = await request.json();
+        const { postId, content, userId, userName } = await request.json();
 
-        if (!content || !userId || !userName) {
-            return NextResponse.json(
-                { error: "Content, userId, and userName are required" },
-                { status: 400 }
-            );
-        }
-
-        const newPost = await prisma.postDIYHomes.create({
-            data: {
-                content,
-                userId,
-                userName
-            }
-        });
-
-        return NextResponse.json(newPost, { status: 201 });
-    } catch (error) {
-        return NextResponse.json(
-            { error: "Failed to create post" },
-            { status: 500 }
-        );
-    }
-}
-
-// POST /api/DIYHomes/forum/reply - Add a reply to a post
-export async function POST(request) {
-    try {
-        const body = await request.json();
-        
-        if (!body.postId || !body.content || !body.userId || !body.userName) {
+        if (!postId || !content || !userId || !userName) {
             return NextResponse.json(
                 { error: "postId, content, userId, and userName are required" },
                 { status: 400 }
             );
         }
 
-        const reply = await prisma.replyDIYHomes.create({
+        const newReply = await prisma.replyDIYHomes.create({
             data: {
-                content: body.content,
-                userId: body.userId,
-                userName: body.userName,
-                postId: body.postId
+                postId,
+                content,
+                userId,
+                userName
             }
         });
 
-        return NextResponse.json(reply);
+        return NextResponse.json(newReply, { status: 201 });
     } catch (error) {
         return NextResponse.json(
             { error: "Failed to create reply" },
             { status: 500 }
         );
     }
-}
+} 

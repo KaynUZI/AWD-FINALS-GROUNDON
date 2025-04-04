@@ -29,16 +29,17 @@ export default function AdminForum() {
         if (!window.confirm('Are you sure you want to delete this message?')) return;
         
         try {
-            const response = await fetch('/api/DIYHomes/forum', {
+            const response = await fetch(`/api/DIYHomes/forum/${messageId}`, {
                 method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ messageId }),
             });
 
-            if (!response.ok) throw new Error('Failed to delete message');
-            fetchMessages(); // Refresh the messages
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to delete message');
+            }
+
+            // Refresh the messages list
+            fetchMessages();
         } catch (err) {
             setError(err.message);
         }
