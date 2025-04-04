@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Savant Solution</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/mobile.css" media="screen and (max-width: 912px)">
 </head>
 <body>
 
@@ -21,6 +22,14 @@
                     <img src="./assets/img/logo2.png" alt="Savant Solution Name">
                 </a>
             </div>
+
+    <!-- Hamburger Menu Icon -->
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
             <ul class="nav-links">
                 <li><a href="./index.html">Home</a></li>
     
@@ -74,7 +83,57 @@
         <div class="about-image">
             <img src="./assets/img/aboutus.png" alt="About Us">
         </div>
+
     </section>
+
+    <!-- New Content Section: People with Roles (Programmer, Designer, etc.) -->
+<section class="roles-section">
+    <div class="content-wrapper">
+        <!-- Marvin Gonzales - Documents & Designer -->
+        <div class="role-card">
+            <img src="./assets/img/gonzales.png" alt="Marvin Gonzales" class="role-image">
+            <h3>Marvin Gonzales</h3>
+            <p>Documents & Designer</p>
+        </div>
+
+        <!-- Jerome Castro - Designer -->
+        <div class="role-card">
+            <img src="./assets/img/castro.png" alt="Jerome Castro" class="role-image">
+            <h3>Jerome Castro</h3>
+            <p>Designer</p>
+        </div>
+
+        <!-- Rhyan Peco - Programmer -->
+        <div class="role-card">
+            <img src="./assets/img/peco.png" alt="Rhyan Peco" class="role-image">
+            <h3>Rhyan Peco</h3>
+            <p>Programmer</p>
+        </div>
+    </div>
+</section>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <p><i class="fa-solid fa-envelope"></i> pekbok_generations@gmail.com</p>
+            <p><i class="fa-solid fa-phone"></i> +63 999 696 818</p>
+            <p><i class="fa-solid fa-location-dot"></i> 69 Pekbok St., Cubao Expo, Philippines</p>
+        </div>
+        
+        <div class="footer-center">
+            <img src="./assets/img/logo.png" alt="Company Logo">
+            <p class="copyright">Copyright © 2025, Designed by Groundon</p>
+        </div>
+    
+        <div class="footer-right">
+            <p><a href="./pages/forum page/index.html"><i class="fa-solid fa-comments"></i> Inquire</a></p>
+        </div>
+    </footer>
+
+    <section class="posts-section">
+        <div id="posts-container"></div>
+    </section>
+
+    <script src="./assets/js/script.js"></script>
 
 </body>
 </html>
