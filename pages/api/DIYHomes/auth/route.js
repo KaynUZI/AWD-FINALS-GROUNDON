@@ -21,7 +21,6 @@ const users = [
 export async function POST(request) {
     try {
         const body = await request.json();
-        console.log('Received login request:', { email: body.email });
 
         if (!body.email || !body.password) {
             return NextResponse.json(
@@ -32,7 +31,6 @@ export async function POST(request) {
 
         // Find user by email
         const user = users.find(u => u.email === body.email);
-        console.log('Found user:', user ? 'yes' : 'no');
 
         if (!user) {
             return NextResponse.json(
@@ -59,7 +57,6 @@ export async function POST(request) {
         });
 
     } catch (error) {
-        console.error('Auth error:', error);
         return NextResponse.json(
             { error: error.message },
             { status: 500 }

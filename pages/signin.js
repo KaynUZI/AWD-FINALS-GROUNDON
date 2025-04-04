@@ -1,5 +1,7 @@
+'use client';
+
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import styles from '../styles/SignIn.module.css';
 
 export default function SignIn() {
@@ -15,8 +17,6 @@ export default function SignIn() {
         setError('');
 
         try {
-            console.log('Attempting to sign in with:', { email });
-            
             const response = await fetch('/api/DIYHomes/auth', {
                 method: 'POST',
                 headers: {
@@ -25,23 +25,22 @@ export default function SignIn() {
                 body: JSON.stringify({ email, password }),
             });
 
-            const data = await response.json();
-            console.log('Response from server:', data);
-
             if (!response.ok) {
-                throw new Error(data.error || 'Login failed');
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Login failed');
             }
 
+            const data = await response.json();
+            
             // Store user data in localStorage
             localStorage.setItem('user', JSON.stringify(data.user));
-            console.log('User data stored:', data.user);
             
-            // Redirect to homepage after successful login
+            // Redirect to homepage
             router.push('/');
+            router.refresh();
 
         } catch (err) {
-            console.error('Sign in error:', err);
-            setError(err.message || 'An error occurred during sign in');
+            setError(err.message);
         } finally {
             setLoading(false);
         }
