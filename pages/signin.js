@@ -15,6 +15,8 @@ export default function SignIn() {
         setError('');
 
         try {
+            console.log('Attempting to sign in with:', { email });
+            
             const response = await fetch('/api/DIYHomes/auth', {
                 method: 'POST',
                 headers: {
@@ -24,6 +26,7 @@ export default function SignIn() {
             });
 
             const data = await response.json();
+            console.log('Response from server:', data);
 
             if (!response.ok) {
                 throw new Error(data.error || 'Login failed');
@@ -31,12 +34,14 @@ export default function SignIn() {
 
             // Store user data in localStorage
             localStorage.setItem('user', JSON.stringify(data.user));
+            console.log('User data stored:', data.user);
             
             // Redirect to homepage after successful login
             router.push('/');
 
         } catch (err) {
-            setError(err.message);
+            console.error('Sign in error:', err);
+            setError(err.message || 'An error occurred during sign in');
         } finally {
             setLoading(false);
         }
@@ -56,6 +61,7 @@ export default function SignIn() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
+                            placeholder="Enter your email"
                         />
                     </div>
                     <div className={styles.formGroup}>
@@ -66,6 +72,7 @@ export default function SignIn() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
+                            placeholder="Enter your password"
                         />
                     </div>
                     <button type="submit" disabled={loading}>
