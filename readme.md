@@ -108,6 +108,7 @@ AWD-FINALS-GROUNDON
 └─ assets
 |   └─ css
 |   |   └─ style.css
+|   |   └─ mobile.css
 |   └─ img
 |   |   └─ logo.png
 |   |   └─ logo2.png
@@ -120,6 +121,7 @@ AWD-FINALS-GROUNDON
 |   |  |   └─ assets
 |   |  |   |    └─ css
 |   |  |   |        └─ style.css
+|   |  |   |        └─ mobile.css
 |   |  |   └─ img
 |   |  |   |   └─ logo.png
 |   |  |   |   └─ logo2.png
@@ -132,6 +134,7 @@ AWD-FINALS-GROUNDON
 |   |    └─ assets
 |   |    |      └─ css
 |   |    |          └─ style.css
+|   |  |   |        └─ mobile.css
 |   |    └─ img
 |   |    |   └─ logo.png
 |   |    |   └─ logo2.png
@@ -147,6 +150,7 @@ AWD-FINALS-GROUNDON
 |   |     └─ assets
 |   |     |   └─ css
 |   |     |       └─ style.css
+|   |     |       └─ mobile.css
 |   |     └─ img
 |   |     |   └─ logo.png
 |   |     |   └─ logo2.png
@@ -159,6 +163,7 @@ AWD-FINALS-GROUNDON
 |   |    └─ assets
 |   |    |    └─ css
 |   |    |        └─ style.css
+|   |    |        └─ mobile.css
 |   |    └─ img
 |   |    |   └─ logo.png
 |   |    |   └─ logo2.png
@@ -171,6 +176,7 @@ AWD-FINALS-GROUNDON
 |   |    └─ assets
 |   |    |    └─ css
 |   |    |        └─ style.css
+|   |    |        └─ mobile.css
 |   |    └─ img
 |   |    |   └─ logo.png
 |   |    |   └─ logo2.png
