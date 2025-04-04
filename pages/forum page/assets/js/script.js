@@ -56,22 +56,24 @@ function setRating(rating) {
 // Fetch Posts from API
 async function fetchPosts() {
     try {
-        const response = await fetch('/api/posts');  // Assuming your API is located at /api/posts
+        const response = await fetch('/api/DIYHomes/forum');
         if (!response.ok) {
             throw new Error('Failed to fetch posts');
         }
-        const posts = await response.json();
+        const data = await response.json();
+        const posts = data.posts;
 
-        // Render posts (assuming you want to display them in a container with id "posts-container")
+        // Render posts
         const postsContainer = document.getElementById("posts-container");
         if (postsContainer) {
-            postsContainer.innerHTML = '';  // Clear any existing posts
+            postsContainer.innerHTML = '';
             posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('post');
                 postElement.innerHTML = `
-                    <h3>${post.title}</h3>
+                    <h3>${post.userName}</h3>
                     <p>${post.content}</p>
+                    <small>${new Date(post.createdAt).toLocaleString()}</small>
                 `;
                 postsContainer.appendChild(postElement);
             });
@@ -143,54 +145,59 @@ function validatePassword(password) {
     return regex.test(password);
 }
 
+// Handle Forum Form Submission
+document.getElementById('forum-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const feedback = document.getElementById('feedback').value;
+    const rating = document.querySelector('input[name="rating"]:checked')?.value || 0;
+
+    try {
+        const response = await fetch('/api/DIYHomes/forum', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                content: `Rating: ${rating} stars\nFeedback: ${feedback}`,
+                userId: email, // Using email as userId for now
+                userName: name
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to submit post');
+        }
+
+        const data = await response.json();
+        showPopup('Post submitted successfully!');
+        
+        // Clear form
+        document.getElementById('forum-form').reset();
+        document.getElementById('selected-rating').innerText = 'Selected Rating: 0 Stars';
+        
+        // Refresh posts
+        fetchPosts();
+    } catch (error) {
+        console.error('Error submitting post:', error);
+        showPopup('Failed to submit post. Please try again.');
+    }
+});
+
+// Popup functions
 function showPopup(message, callback) {
     const popup = document.getElementById('popup');
     const popupMessage = document.getElementById('popup-message');
     popupMessage.innerHTML = message;
     popup.style.display = 'block';
-
+    
     if (callback) {
-        setTimeout(() => {
-            popup.style.display = 'none';
-            callback();
-        }, 1500);  // Close popup after 1.5 seconds
-    } else {
-        setTimeout(() => {
-            popup.style.display = 'none';
-        }, 1500);  // Close popup after 1.5 seconds for error messages
+        setTimeout(callback, 2000);
     }
 }
 
-document.getElementById('login-form').addEventListener('submit', function (event) {
-    event.preventDefault();
-    
-    const username = document.getElementById('login-username').value;
-    const password = document.getElementById('login-password').value;
-
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    
-    // Check if username and password match
-    const user = users.find(u => u.username === username && u.password === password);
-    
-    if (user) {
-        // Successful login, save to sessionStorage or localStorage for logged-in state
-        sessionStorage.setItem("loggedInUser", username);  // Store the logged-in user
-        
-        showPopup("Login successful!", () => {
-            window.location.href = "index.html";  // Redirect after successful login
-        });
-    } else {
-        let errorMessage = '';
-        if (!users.some(u => u.username === username)) {
-            errorMessage = "Username not found!";
-        } else {
-            errorMessage = "Incorrect password!";
-        }
-        showPopup(errorMessage);
-    }
-});
-
 function closePopup() {
-    const popup = document.getElementById('popup');
-    popup.style.display = 'none';
+    document.getElementById('popup').style.display = 'none';
 }

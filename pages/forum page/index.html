@@ -54,41 +54,43 @@
         <div class="forum-container">
             <h2>Join the Forum</h2>
             
-            <!-- Login Form -->
-            <label for="name">Name:</label>
-            <input type="text" id="name" placeholder="Enter your name">
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="Enter your email">
-            
-            <!-- Feedback -->
-            <label for="feedback">Feedback:</label>
-            <textarea id="feedback" placeholder="Write your feedback..."></textarea>
-            
-            <!-- Star Rating -->
-            <label>Rate Us:</label>
-            <div class="star-rating">
-                <input type="radio" name="rating" id="star5" value="5">
-                <label for="star5" onclick="setRating(5)">★</label>
+            <form id="forum-form">
+                <!-- Login Form -->
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
                 
-                <input type="radio" name="rating" id="star4" value="4">
-                <label for="star4" onclick="setRating(4)">★</label>
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
                 
-                <input type="radio" name="rating" id="star3" value="3">
-                <label for="star3" onclick="setRating(3)">★</label>
+                <!-- Feedback -->
+                <label for="feedback">Feedback:</label>
+                <textarea id="feedback" placeholder="Write your feedback..." required></textarea>
                 
-                <input type="radio" name="rating" id="star2" value="2">
-                <label for="star2" onclick="setRating(2)">★</label>
-                
-                <input type="radio" name="rating" id="star1" value="1">
-                <label for="star1" onclick="setRating(1)">★</label>
-            </div>
+                <!-- Star Rating -->
+                <label>Rate Us:</label>
+                <div class="star-rating">
+                    <input type="radio" name="rating" id="star5" value="5">
+                    <label for="star5" onclick="setRating(5)">★</label>
+                    
+                    <input type="radio" name="rating" id="star4" value="4">
+                    <label for="star4" onclick="setRating(4)">★</label>
+                    
+                    <input type="radio" name="rating" id="star3" value="3">
+                    <label for="star3" onclick="setRating(3)">★</label>
+                    
+                    <input type="radio" name="rating" id="star2" value="2">
+                    <label for="star2" onclick="setRating(2)">★</label>
+                    
+                    <input type="radio" name="rating" id="star1" value="1">
+                    <label for="star1" onclick="setRating(1)">★</label>
+                </div>
 
-            <!-- Show Selected Rating -->
-            <p id="selected-rating">Selected Rating: 0 Stars</p>
+                <!-- Show Selected Rating -->
+                <p id="selected-rating">Selected Rating: 0 Stars</p>
 
-            <!-- Submit Button -->
-            <button type="submit">Submit</button>
+                <!-- Submit Button -->
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
         </div>
     </section>
 
@@ -112,6 +114,13 @@
     <section class="posts-section">
         <div id="posts-container"></div>
     </section>
+
+    <!-- Success Pop-up -->
+    <div class="popup-overlay" id="popup-overlay"></div>
+    <div id="popup" class="popup">
+        <p id="popup-message"></p>
+        <button onclick="closePopup()">OK</button>
+    </div>
 
     <script src="../forum page/assets/js/script.js"></script>
 
