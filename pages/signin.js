@@ -32,12 +32,8 @@ export default function SignIn() {
             // Store user data in localStorage
             localStorage.setItem('user', JSON.stringify(data.user));
             
-            // Redirect based on user role
-            if (data.user.role === 'admin') {
-                router.push('/admin-dashboard');
-            } else {
-                router.push('/dashboard');
-            }
+            // Redirect to homepage after successful login
+            router.push('/');
 
         } catch (err) {
             setError(err.message);
