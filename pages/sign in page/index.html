@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Savant Solution</title>
+    <link rel="stylesheet" href="../sign in page/assets/css/style.css">
+    <link rel="stylesheet" href="../sign in page/assets/css/mobile.css" media="screen and (max-width: 912px)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header  -->
+    <header class="navbar">
+        <div class="navdiv">
+            <div class="logo">
+                <a href="../../index.html">
+                    <img src="../sign in page/assets/img/logo.png" alt="Savant Solution Logo">
+                    <img src="../sign in page/assets/img/logo2.png" alt="Savant Solution Name">
+                </a>
+            </div>
+
+    <!-- Hamburger Menu Icon -->
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+
+                <li class="dropdown">
+                    <a href="../services page/index.html" class="dropbtn">
+                        Our Services <i class="fa-solid fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li><a href="../forum page/index.html">Forum</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="../project page/index.html">Projects</a></li>
+                <li><a href="../sign in page/index.html">Sign In</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Background Section -->
+    <section class="background">
+        <div class="auth-container">
+            <h1>Welcome to Sign In</h1>
+            <p>Sign Up, explore, and be one of us!</p>
+            
+            <form id="signup-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="auth-button">Sign In</button>
+            </form>
+
+            <p>Already have an account? <a href="../log in page/index.html">Log In</a></p>
+
+            <div class="brand-logo">
+                <img src="../sign in page/assets/img/logo.png" alt="Savant Solution Logo">
+                <h2>SAVANT SOLUTIONZ</h2>
+                <p>Smart Solutions for Home & Business</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <p><i class="fa-solid fa-envelope"></i> pekbok_generations@gmail.com</p>
+            <p><i class="fa-solid fa-phone"></i> +63 999 696 818</p>
+            <p><i class="fa-solid fa-location-dot"></i> 69 Pekbok St., Cubao Expo, Philippines</p>
+        </div>
+        
+        <div class="footer-center">
+            <img src="../sign in page/assets/img/logo.png" alt="Company Logo">
+            <p class="copyright">Copyright © 2025, Designed by Groundon</p>
+        </div>
+    
+        <div class="footer-right">
+            <p><a href="../forum page/index.html"><i class="fa-solid fa-comments"></i> Inquire</a></p>
+        </div>
+    </footer>    
+
+    <section class="posts-section">
+        <div id="posts-container"></div>
+    </section>
+
+     <!-- Success Pop-up -->
+    <div id="popup" class="popup">
+        <p id="popup-message"></p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
+    <script src="../sign in page/assets/js/script.js"></script>
+
+</body>
+</html>
