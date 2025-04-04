@@ -1,10 +1,25 @@
 import { NextResponse } from 'next/server';
 
+// Sample data
+const sampleUsers = [
+    {
+        id: 1,
+        name: "John Doe",
+        email: "john@example.com",
+        role: "user"
+    },
+    {
+        id: 2,
+        name: "Jane Smith",
+        email: "jane@example.com",
+        role: "user"
+    }
+];
+
 // GET /api/DIYHomes/users
 export async function GET() {
     try {
-        // TODO: Implement database connection and query
-        return NextResponse.json({ message: 'Users fetched successfully' });
+        return NextResponse.json(sampleUsers);
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
@@ -14,8 +29,12 @@ export async function GET() {
 export async function POST(request) {
     try {
         const body = await request.json();
-        // TODO: Implement user creation logic
-        return NextResponse.json({ message: 'User created successfully' });
+        const newUser = {
+            id: sampleUsers.length + 1,
+            ...body
+        };
+        sampleUsers.push(newUser);
+        return NextResponse.json(newUser);
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
@@ -25,8 +44,12 @@ export async function POST(request) {
 export async function PUT(request) {
     try {
         const body = await request.json();
-        // TODO: Implement user update logic
-        return NextResponse.json({ message: 'User updated successfully' });
+        const index = sampleUsers.findIndex(user => user.id === body.id);
+        if (index !== -1) {
+            sampleUsers[index] = { ...sampleUsers[index], ...body };
+            return NextResponse.json(sampleUsers[index]);
+        }
+        return NextResponse.json({ error: "User not found" }, { status: 404 });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
@@ -36,8 +59,12 @@ export async function PUT(request) {
 export async function DELETE(request) {
     try {
         const body = await request.json();
-        // TODO: Implement user deletion logic
-        return NextResponse.json({ message: 'User deleted successfully' });
+        const index = sampleUsers.findIndex(user => user.id === body.id);
+        if (index !== -1) {
+            sampleUsers.splice(index, 1);
+            return NextResponse.json({ message: "User deleted successfully" });
+        }
+        return NextResponse.json({ error: "User not found" }, { status: 404 });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
