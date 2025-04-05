@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Savant Solution</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/mobile.css" media="screen and (max-width: 912px)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="navbar">
+        <div class="navdiv">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="./assets/img/logo.png" alt="Savant Solution Logo">
+                    <img src="./assets/img/logo2.png" alt="Savant Solution Name">
+                </a>
+            </div>
+    
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+    
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+    
+                <li class="dropdown">
+                    <a href="../services page/index.html" class="dropbtn">
+                        Our Services <i class="fa-solid fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li><a href="../forum page/index.html">Forum</a></li>
+                    </ul>
+                </li>
+    
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="signin.html">Sign In</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Feedback Display Section -->
+    <section class="background">
+        <div class="forum-container">
+            <h2>User Feedback</h2>
+            <section class="posts-section">
+                <h3>Submitted Feedbacks</h3>
+                <div id="posts-container"></div>
+            </section>
+            <div id="feedback-display" class="feedback-list"></div>
+            <a href="../forum page/index.html" class="go-back-link">Go Back to Forum</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <p><i class="fa-solid fa-envelope"></i> pekbok_generations@gmail.com</p>
+            <p><i class="fa-solid fa-phone"></i> +63 999 696 818</p>
+            <p><i class="fa-solid fa-location-dot"></i> 69 Pekbok St., Cubao Expo, Philippines</p>
+        </div>
+        
+        <div class="footer-center">
+            <img src="./assets/img/logo.png" alt="Company Logo">
+            <p class="copyright">Copyright © 2025, Designed by Groundon</p>
+        </div>
+    
+        <div class="footer-right">
+            <p><a href="../forum page/index.html"><i class="fa-solid fa-comments"></i> Inquire</a></p>
+        </div>
+    </footer>
+    
+    <script>
+    // Load feedback from localStorage and display it on feedback.html
+    document.addEventListener('DOMContentLoaded', function() {
+        let feedbackList = JSON.parse(localStorage.getItem('feedbackList')) || [];
+    
+        const postsContainer = document.getElementById('posts-container');
+        feedbackList.forEach(function(feedback) {
+            const postDiv = document.createElement('div');
+            postDiv.classList.add('feedback-post');
+    
+            postDiv.innerHTML = `
+                <h4>${feedback.name}</h4>
+                <p><strong>Email:</strong> ${feedback.email}</p>
+                <p><strong>Feedback:</strong> ${feedback.feedback}</p>
+            `;
+    
+            postsContainer.appendChild(postDiv);
+        });
+    });
+    </script>
+
+<script>
+    // Function to display feedbacks
+    window.onload = function() {
+        const postsContainer = document.getElementById('posts-container');
+        const feedbackList = JSON.parse(localStorage.getItem('feedbacks')) || [];
+
+        // Check if there are feedbacks
+        if (feedbackList.length > 0) {
+            feedbackList.forEach(feedback => {
+                const feedbackElement = document.createElement('div');
+                feedbackElement.classList.add('feedback-item');
+                feedbackElement.innerHTML = `
+                    <p><strong>Username:</strong> ${feedback.username}</p>
+                    <p><strong>Email:</strong> ${feedback.email}</p>
+                    <p><strong>Feedback:</strong> ${feedback.feedback}</p>
+                    <p><strong>Rating:</strong> ${feedback.rating} Stars</p>
+                    <hr>
+                `;
+                postsContainer.appendChild(feedbackElement);
+            });
+        } else {
+            postsContainer.innerHTML = '<p>No feedbacks submitted yet.</p>';
+        }
+    };
+</script>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
